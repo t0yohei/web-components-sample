@@ -1,0 +1,28 @@
+<document-title text="Web Component Grid"></document-title>
+<div class="square">text</div>
+
+<script>
+  class DocumentTitle extends HTMLElement {
+    constructor() { super(); }
+
+    connectedCallback() {
+      this.attachShadow({ mode: 'open' });
+      const titleElement = document.createElement('h1');
+      titleElement.textContent = this.hasAttribute('text') ? this.getAttribute('text') : 'title';
+      titleElement.setAttribute('class', 'title');
+
+      const style = document.createElement('style');
+      style.textContent = '.title { color: blue; }'
+      this.shadowRoot.append(style, titleElement);
+    }
+  }
+  customElements.define('document-title', DocumentTitle);
+</script>
+
+<style>
+  .square {
+    width: 30px;
+    height: 30px;
+    background: beige;
+  }
+</style>
